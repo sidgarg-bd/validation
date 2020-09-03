@@ -1,102 +1,129 @@
 package com.scalaValidate
 
-import org.apache.spark.sql.functions.{col, when}
-import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
-import org.apache.spark.sql.{DataFrame, Row, SparkSession}
+import org.apache.spark.sql.catalyst.dsl.expressions.StringToAttributeConversionHelper
 import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.sql.{DataFrame, Row, SparkSession}
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types.{IntegerType, StringType, StructField, StructType}
 
-object validate {
+  object validate {
 
-  def main(args: Array[String]) {
-    println("Hello from App")
-    val conf = new SparkConf()
-      .setAppName("POC")
-      .setMaster("local[2]")
+    def main(args : Array[String]) {
+      println("Hello from App")
+      val conf = new SparkConf()
+        .setAppName("POC")
+        .setMaster("local[2]")
 
-    val sc = new SparkContext(conf)
-    val spark = SparkSession.builder.config(sc.getConf).getOrCreate()
+      val sc = new SparkContext(conf)
+      val spark = SparkSession.builder.config(sc.getConf).getOrCreate()
 
-    val someData = Seq(
-      Row(8, "bat"),
-      Row(null, "cat"),
-      Row(-27, "horse")
-    )
+      val someData = Seq(
+        Row(123, "bat"),
+        Row(123, "cat"),
+        Row(123, "hor")
+      )
 
-    val someSchema = List(
-      StructField("number", IntegerType, true),
-      StructField("word", StringType, true)
-    )
+      val someSchema = List(
+        StructField("number", IntegerType, true),
+        StructField("word", StringType, true)
+      )
 
-    val someDF = spark.createDataFrame(
-      sc.parallelize(someData),
-      StructType(someSchema)
-    )
+      val someDF = spark.createDataFrame(
+        sc.parallelize(someData),
+        StructType(someSchema)
+      )
 
-    def Check(df: DataFrame, ls: List[String], condition: String, ignore: Boolean): Unit = {
-      val newDf = df.select(ls.map(col): _*)
-      if (ignore == true) {
-        val res = ignoreTrue(newDf: DataFrame)
+      def Check(df: DataFrame, ls: List[String], condition: String, sze: Int = 4, ignore: Boolean): Unit = {
+        val newDf = df.select(ls.map(col): _*)
+        if(ignore == true){
+          val res = ignoreTrue(newDf: DataFrame)
+        }
+        else{
+          if (condition == "null") {
+            val res = nullCheck(newDf: DataFrame)
+          }
+          else if(condition == "notnull"){
+            val res = notNullCheck(newDf: DataFrame)
+          }
+          else if(condition == "empty"){
+            val res = emptyCheck(newDf: DataFrame)
+          }
+          else if(condition == "length"){
+            if(ls.length == 1){
+              val res = lengthCheck(newDf: DataFrame, ls: List[String], sze: Int)
+            }
+            else{
+              println("Column list for length check must be 1..EXITING")
+              System.exit(1)
+            }
+          }
+        }
+
       }
-      else {
-        if (condition == "null") {
-          val res = nullCheck(newDf: DataFrame, ls: List[String])
-          //println(res)
+
+      def ignoreTrue(frame: DataFrame): Unit = {
+        println("Ignore True case: Filter Not Null Values")
+        frame.na.drop().show()
+      }
+
+      def nullCheck(frame: DataFrame): Unit = {
+        val filterCond = frame.columns.map(x=>col(x).isNull).reduce(_ || _)
+        println("Ignore False NULL case: Filter Null Values as true")
+        val filteredDf = frame.withColumn("result", when(filterCond, true).otherwise(false)).show()
+      }
+
+      def notNullCheck(frame: DataFrame): Unit = {
+        val filterCond = frame.columns.map(x=>col(x).isNotNull).reduce(_ && _)
+        println("Ignore False Not NULL case: Filter Not Null Values as true")
+        val filteredDf = frame.withColumn("result", when(filterCond, true).otherwise(false)).show()
+      }
+
+      def emptyCheck(frame: DataFrame): Unit = {
+        val filterCond = frame.rdd.isEmpty()
+        println("Ignore False empty case: check if dataframe is empty or not")
+        if (filterCond == true){
+          println("Dataframe is Empty")
+        }
+        else{
+          println("Dataframe is not empty")
         }
       }
 
-    }
+      def lengthCheck(frame: DataFrame, lst: List[String], sz: Int): Unit = {
+        for(colName <- lst){
+          val filteredDf = frame.filter(length(col(colName)) === sz)
+          if(filteredDf.count() > 0){
+            println("Dataframe's column length matched")
+          }
+          else{
+            println("Dataframe's column length not matched")
+          }
+        }
+      }
 
-    def ignoreTrue(frame: DataFrame): Unit = {
-      frame.na.drop().show()
-      //      var frame1: DataFrame = spark.createDataFrame(sc.emptyRDD[Row], frame.schema)
-      //      val len = colList.length
-      //      for (i <- 0 until len) {
-      //        frame1 = frame.filter(col(colList[i] && col).isNotNull).union(frame1)
+      //val filterCond = frame.columns.map(x=>col(x).length() == 4).reduce(_ && _)
+      //println(filterCond)
+      //      if (filterCond == true){
+      //        println("Dataframe's column length matched")
       //      }
-      //      frame1.show()
-    }
+      //      else{
+      //        println("Dataframe's column length not matched")
+      //      }
+      //println("Ignore False Not NULL case: Filter Not Null Values as true")
+      //val filteredDf = frame.withColumn("result", when(filterCond, true).otherwise(false)).show()
+      //println(frame.columns.map(x=>length(col(x)) === sz).reduce(_ && _))
+      //val filterCond = frame.columns.map(x=>length(col(x)) === sz).reduce(_ && _)
+      //frame.withColumn("size", frame.columns.map(x=>size(col(x))).reduce(_ && _)).show()
+      //println(filterCond)
+      //println("Ignore False Not NULL case: Filter Not Null Values as true")
+      //val filteredDf = frame.withColumn("result", when(filterCond, true).otherwise(false)).show()
 
-    def nullCheck(frame: DataFrame, ls: List[String]): Unit = {
-      val filterCond = frame.columns.map(x => col(x).isNull).reduce(_ || _)
-      print(filterCond)
-      val filteredDf = frame.withColumn("result", when(filterCond, true).otherwise(false)).show()
-      //      cond ='|'.join('(col("'+str(_)+'")==0)' for _ in range(1, 12))
-      //
-      //      cond = '('+cond+')'
-      //
-      //      print(cond)
-      //      val cond = for(l <- ls){println(("col('"+l+"').isNull").mkString("|"))}
-      //      println(cond)
-      //{(frame.col(colu).isNull)}
-      //println(con)
-      //      cond_expr = functools.reduce(operator.or_, [(f.col(c) == 0) for c in df1.columns])
-      //      frame.withColumn("NewCol", when(col("A").isNull,true).when(col("B").isNull,0).when(col("C") === 0,0).otherwise(1))
-      //      val coder = (df: DataFrame) => {for(colu <- df.columns){when(col(colu).isNull , true).otherwise(false)}}
 
-      //      val sqlFun = udf(coder)
-      //      frame.withColumn("result", sqlFun(frame.columns)).show()
-      //      var check=0
-      //      var res=false
-      //      var frame1: DataFrame = spark.createDataFrame(sc.emptyRDD[Row], frame.schema)
-      //      frame1 = frame1.withColumn("result", lit(true))
-      //      for(colName <- lst){
-      //        frame1 = frame.withColumn("result", when(col(colName).isNull, true).otherwise(false)).unionAll(frame1)
-      //      }
-      //      frame1.show()
-      //      {
-      //        if(frame.filter(col(colName).isNull).count() > 0){
-      //          check=check+1
-      //        }
-      //      }
-      //      println(check)
-      //      if(check > 0){
-      //        res = true
-      //      }
-      //      return res
+      Check(someDF, List( "number", "word"), "null", 1,true)
+      Check(someDF, List( "number", "word"), "null", 1,false)
+      Check(someDF, List( "number", "word"), "notnull", 1,false)
+      Check(someDF, List( "number", "word"), "empty", 1,false)
+      Check(someDF, List("word"), "length", 3,false)
+      println("Bye from this App")
     }
-    Check(someDF, List("number", "word"), "null", true)
-    Check(someDF, List("number", "word"), "null", false)
-    //someDF.filter(col("word").isNull).count()
-    println("Bye from this App")
   }
-}
