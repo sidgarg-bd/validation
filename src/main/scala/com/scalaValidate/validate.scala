@@ -38,7 +38,7 @@ object validate {
       val newDf = df.select(ls.map(col): _*)
       if(ignore == true)
       {
-        val res = ignoreTrue(df: DataFrame, newDf: DataFrame, ls: List[String])
+        val res = ignoreTrue(df: DataFrame, newDf: DataFrame, ls: List[String],condition: String, sze: Int)
       }
       else
       {
@@ -58,7 +58,7 @@ object validate {
         {
           if (ls.length == 1)
           {
-            val res = lengthCheck(newDf: DataFrame, ls: List[String], sze: Int)
+            val res = lengthCheck(df: DataFrame, newDf: DataFrame, ls: List[String], sze: Int)
           }
           else
           {
@@ -69,22 +69,39 @@ object validate {
       }
     }
 
-    def ignoreTrue(frame: DataFrame, newFrame: DataFrame, lst: List[String]): Unit = {
-      val newDropFrame = newFrame.na.drop()
-      println("Ignore True case: Filter Not Null Values")
-      val resDf = frame.join(newDropFrame, lst).show()
+    def ignoreTrue(frame: DataFrame, newFrame: DataFrame, lst: List[String],cond: String, sz: Int): Unit = {
+      if(cond == "length"){
+        if (lst.length == 1)
+        {
+          for (colName <- lst) {
+            val newLenFrame = newFrame.filter(length(col(colName)) === sz)
+            println("Ignore True case: Filter Values with Length")
+            val resDf = frame.join(newLenFrame, lst).show()
+          }
+        }
+        else
+        {
+          println("Column list for length check must be 1..EXITING")
+          System.exit(1)
+        }
+      }
+      else{
+        val newDropFrame = newFrame.na.drop()
+        println("Ignore True case: Filter Not Null Values")
+        val resDf = frame.join(newDropFrame, lst).show()
+      }
     }
 
     def nullCheck(frame: DataFrame, newFrame: DataFrame, lst: List[String]): Unit = {
       val filterCond = newFrame.columns.map(x=>col(x).isNull).reduce(_ || _)
       val filteredDf = newFrame.withColumn("result", when(filterCond, true).otherwise(false))
-      var resDf = frame.join(filteredDf, lst).show()
+      val resDf = frame.join(filteredDf, lst).show()
     }
 
     def notNullCheck(frame: DataFrame, newFrame: DataFrame, lst: List[String]): Unit = {
       val filterCond = newFrame.columns.map(x=>col(x).isNotNull).reduce(_ && _)
       val filteredDf = newFrame.withColumn("result", when(filterCond, true).otherwise(false))
-      var resDf = frame.join(filteredDf, lst).show()
+      val resDf = frame.join(filteredDf, lst).show()
     }
 
     def emptyCheck(frame: DataFrame): Unit = {
@@ -98,23 +115,20 @@ object validate {
       }
     }
 
-    def lengthCheck(frame: DataFrame, lst: List[String], sz: Int): Unit = {
+    def lengthCheck(frame: DataFrame, newFrame: DataFrame, lst: List[String], sz: Int): Unit = {
       for (colName <- lst) {
-        val filteredDf = frame.filter(length(col(colName)) === sz)
-        if (filteredDf.count() > 0) {
-          println("Dataframe's column length matched")
-        }
-        else {
-          println("Dataframe's column length not matched")
-        }
+        val filteredDf = newFrame.withColumn("result",when(length(col(colName)) === sz, true).otherwise(false))
+        val resDf = frame.join(filteredDf, lst).show()
       }
     }
 
-    Check(someDF, List("number", "word"), "null", 1, true)
+
+    Check(someDF, List("word"), "length", 3, true)
     Check(someDF, List("number", "word"), "null", 1, false)
     Check(someDF, List("number", "word"), "notnull", 1, false)
     Check(someDF, List("number", "word"), "empty", 1, false)
     Check(someDF, List("word"), "length", 3, false)
+    Check(someDF, List("number", "word"), "length", 3, true)
     println("Bye from this App")
   }
 }
