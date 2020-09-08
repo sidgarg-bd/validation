@@ -17,9 +17,9 @@ object validate {
     val spark = SparkSession.builder.config(sc.getConf).getOrCreate()
 
     val someData = Seq(
-      Row(1, 8, "bat", 1),
-      Row(2, null, "cat", 2),
-      Row(null, -27, "horse", null)
+      Row(1, 8, "bat"),
+      Row(2, null, "cat"),
+      Row(null, -27, "horse")
     )
 
     val someSchema = List(
@@ -75,9 +75,12 @@ object validate {
         {
           for (colName <- lst) {
             val newLenFrame = newFrame.filter(length(col(colName)) === sz)
-            val resDf = frame.join(newLenFrame, lst)
-            val cols = frame.columns
-            resDf.select(cols.head, cols.tail: _*).show()
+            val joinCond = newFrame.columns.map(x=>frame.col(x) <=> newFrame.col(x)).reduce(_ && _)
+            var resDf = frame.join(newLenFrame, joinCond)
+            for(colName <- newFrame.columns){
+              resDf = resDf.drop(newFrame.col(s"$colName"))
+            }
+            resDf.show()
             println("Ignore True case: Filter Values with Length")
           }
         }
@@ -89,9 +92,12 @@ object validate {
       }
       else{
         val newDropFrame = newFrame.na.drop()
-        val resDf = frame.join(newDropFrame, lst)
-        val cols = frame.columns
-        resDf.select(cols.head, cols.tail: _*).show()
+        val joinCond = newFrame.columns.map(x=>frame.col(x) <=> newFrame.col(x)).reduce(_ && _)
+        var resDf = frame.join(newDropFrame, joinCond)
+        for(colName <- newFrame.columns){
+          resDf = resDf.drop(newFrame.col(s"$colName"))
+        }
+        resDf.show()
         println("Ignore True case: Filter Not Null Values")
       }
     }
@@ -99,18 +105,24 @@ object validate {
     def nullCheck(frame: DataFrame, newFrame: DataFrame, lst: List[String]): Unit = {
       val filterCond = newFrame.columns.map(x=>col(x).isNull).reduce(_ || _)
       val filteredDf = newFrame.withColumn("result", when(filterCond, true).otherwise(false))
-      val resDf = frame.join(filteredDf, lst)
-      val cols = frame.columns :+ "result"
-      resDf.select(cols.head, cols.tail: _*).show()
+      val joinCond = newFrame.columns.map(x=>frame.col(x) <=> newFrame.col(x)).reduce(_ && _)
+      var resDf = frame.join(filteredDf, joinCond)
+      for(colName <- newFrame.columns){
+        resDf = resDf.drop(newFrame.col(s"$colName"))
+      }
+      resDf.show()
       println("Ignore False Null check case: True for null values in list")
     }
 
     def notNullCheck(frame: DataFrame, newFrame: DataFrame, lst: List[String]): Unit = {
       val filterCond = newFrame.columns.map(x=>col(x).isNotNull).reduce(_ && _)
       val filteredDf = newFrame.withColumn("result", when(filterCond, true).otherwise(false))
-      val resDf = frame.join(filteredDf, lst)
-      val cols = frame.columns :+ "result"
-      resDf.select(cols.head, cols.tail: _*).show()
+      val joinCond = newFrame.columns.map(x=>frame.col(x) <=> newFrame.col(x)).reduce(_ && _)
+      var resDf = frame.join(filteredDf, joinCond)
+      for(colName <- newFrame.columns){
+        resDf = resDf.drop(newFrame.col(s"$colName"))
+      }
+      resDf.show()
       println("Ignore False Not Null check case: True for not null values in list")
     }
 
@@ -128,9 +140,12 @@ object validate {
     def lengthCheck(frame: DataFrame, newFrame: DataFrame, lst: List[String], sz: Int): Unit = {
       for (colName <- lst) {
         val filteredDf = newFrame.withColumn("result",when(length(col(colName)) === sz, true).otherwise(false))
-        val resDf = frame.join(filteredDf, lst)
-        val cols = frame.columns :+ "result"
-        resDf.select(cols.head, cols.tail: _*).show()
+        val joinCond = newFrame.columns.map(x=>frame.col(x) <=> newFrame.col(x)).reduce(_ && _)
+        var resDf = frame.join(filteredDf, joinCond)
+        for(colName <- newFrame.columns){
+          resDf = resDf.drop(newFrame.col(s"$colName"))
+        }
+        resDf.show()
         println("Ignore False Length check case: True for correct length values in list")
       }
     }
