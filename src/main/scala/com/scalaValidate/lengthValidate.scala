@@ -14,27 +14,7 @@ object lengthValidate {
 
     val sc = new SparkContext(conf)
     val spark = SparkSession.builder.config(sc.getConf).getOrCreate()
-
-    val someData = Seq(
-      Row(1, "8", "bat"),
-      Row(2, null, null),
-      Row(3, null, "cat"),
-      Row(4, "", ""),
-      Row(null, "27", "horse"),
-      Row(6, "", null)
-
-    )
-
-    val someSchema = List(
-      StructField("id", IntegerType, true),
-      StructField("class", StringType, true),
-      StructField("word", StringType, true)
-    )
-
-    val someDF = spark.createDataFrame(
-      sc.parallelize(someData),
-      StructType(someSchema)
-    )
+    val someDF = spark.read.format("csv").option("header", "true").option("delimiter","|").load("src/main/resources/test.csv")
 
     def lengthCheck(df: DataFrame, colName: String, sze: Int, ignore: Boolean): Unit =
     {
@@ -57,8 +37,8 @@ object lengthValidate {
     }
 
 
-    lengthCheck(someDF, "word", 3, true)
-    lengthCheck(someDF, "word", 3, false)
+    lengthCheck(someDF, "agcy_id", 4, true)
+    lengthCheck(someDF, "agcy_id", 4, false)
     println("Bye from this App")
   }
 }

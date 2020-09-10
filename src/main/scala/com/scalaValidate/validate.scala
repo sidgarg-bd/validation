@@ -15,27 +15,7 @@ object validate {
 
     val sc = new SparkContext(conf)
     val spark = SparkSession.builder.config(sc.getConf).getOrCreate()
-
-    val someData = Seq(
-      Row(1, "8", "bat"),
-      Row(2, null, null),
-      Row(3, null, "cat"),
-      Row(4, "", ""),
-      Row(null, "27", "horse"),
-      Row(6, "", null)
-
-    )
-
-    val someSchema = List(
-      StructField("id", IntegerType, true),
-      StructField("class", StringType, true),
-      StructField("word", StringType, true)
-    )
-
-    val someDF = spark.createDataFrame(
-      sc.parallelize(someData),
-      StructType(someSchema)
-    )
+    val someDF = spark.read.format("csv").option("header", "true").option("delimiter","|").load("src/main/resources/test.csv")
 
     def Check(df: DataFrame, ls: List[String], condition: String, ignore: Boolean): Unit =
     {
@@ -108,10 +88,10 @@ object validate {
       println("Ignore False Empty check case: True for empty values in list")
     }
 
-    Check(someDF, List("class", "word"), "null", true)
-    Check(someDF, List("class", "word"), "null", false)
-    Check(someDF, List("class", "word"), "notnull", false)
-    Check(someDF, List("class", "word"), "empty", false)
+    Check(someDF, List("source", "agcy_id"), "null", true)
+    Check(someDF, List("source", "agcy_id"), "null", false)
+    Check(someDF, List("source", "agcy_id"), "notnull", false)
+    Check(someDF, List("source", "agcy_id"), "empty", false)
     println("Bye from this App")
   }
 }
