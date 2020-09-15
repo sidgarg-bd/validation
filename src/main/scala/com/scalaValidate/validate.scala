@@ -20,11 +20,10 @@ object validate {
 
       val someData = Seq(
         Row(1, "8", "bat"),
-        Row(2, null, null),
+        Row(2, "27", "horse"),
         Row(3, null, "cat"),
         Row(4, "", ""),
-        Row(null, "27", "horse"),
-        Row(6, "", null)
+        Row(5, "", null)
 
       )
 
@@ -44,7 +43,14 @@ object validate {
         val newDf = df.select(ls.map(col): _*)
         if(ignore == true)
         {
-          val res = ignoreTrue(df: DataFrame, newDf: DataFrame)
+          if (condition == "empty")
+          {
+            val res = ignoreTrueEmpty(df: DataFrame, newDf: DataFrame)
+          }
+          else {
+            val res = ignoreTrue(df: DataFrame, newDf: DataFrame)
+          }
+
         }
         else
         {
@@ -72,6 +78,18 @@ object validate {
         }
         resDf.dropDuplicates().show()
         println("Ignore True case: Filter Not Null Values")
+      }
+
+      def ignoreTrueEmpty(frame: DataFrame, newFrame: DataFrame): Unit = {
+        val filterCond = newFrame.columns.map(x=>col(x) =!= "").reduce(_ || _)
+        val filteredDf = newFrame.filter(filterCond)
+        val joinCond = newFrame.columns.map(x=>frame.col(x) <=> newFrame.col(x)).reduce(_ && _)
+        var resDf = frame.join(filteredDf, joinCond)
+        for(colName <- newFrame.columns){
+          resDf = resDf.drop(newFrame.col(s"$colName"))
+        }
+        resDf.dropDuplicates().show()
+        println("Ignore True Empty check case: Filter empty values in list")
       }
 
       def nullCheck(frame: DataFrame, newFrame: DataFrame): Unit = {
@@ -113,7 +131,8 @@ object validate {
       Check(someDF, List("class", "word"), "null", true)
       Check(someDF, List("class", "word"), "null", false)
       Check(someDF, List("class", "word"), "notnull", false)
-      Check(someDF, List("word"), "empty", false)
+      Check(someDF, List("class", "word"), "empty", false)
+      Check(someDF, List("class", "word"), "empty", true)
       println("Bye from this App")
     }
 
