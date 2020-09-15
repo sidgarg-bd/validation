@@ -73,7 +73,7 @@ object compValidate {
           resDf = resDf.drop(newFrame.col(s"$colName"))
         }
         resDf.dropDuplicates().show()
-        println(s"Ignore True Comparison check case: Filter values for $cond")
+        println(s"Ignore False Comparison check case: True for values for $cond")
       }
 
       compCheck(someDF, List("class", "word"), "===", 3, true)
