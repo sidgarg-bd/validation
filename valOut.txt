@@ -1,0 +1,58 @@
+Hello from App
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+20/09/16 11:05:58 INFO SparkContext: Running Spark version 2.4.6
+20/09/16 11:05:58 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+20/09/16 11:05:58 INFO SparkContext: Submitted application: POC
+20/09/16 11:05:58 INFO SecurityManager: Changing view acls to: SIGarg
+20/09/16 11:05:58 INFO SecurityManager: Changing modify acls to: SIGarg
+20/09/16 11:05:58 INFO SecurityManager: Changing view acls groups to: 
+20/09/16 11:05:58 INFO SecurityManager: Changing modify acls groups to: 
+20/09/16 11:05:58 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(SIGarg); groups with view permissions: Set(); users  with modify permissions: Set(SIGarg); groups with modify permissions: Set()
+20/09/16 11:05:59 INFO Utils: Successfully started service 'sparkDriver' on port 53330.
+20/09/16 11:05:59 INFO SparkEnv: Registering MapOutputTracker
+20/09/16 11:05:59 INFO SparkEnv: Registering BlockManagerMaster
+20/09/16 11:05:59 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+20/09/16 11:05:59 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+20/09/16 11:05:59 INFO DiskBlockManager: Created local directory at C:\Users\sigarg.LUXOFT\AppData\Local\Temp\blockmgr-c42c0b6b-a942-488f-8107-f32d93a8a0e7
+20/09/16 11:05:59 INFO MemoryStore: MemoryStore started with capacity 1951.2 MB
+20/09/16 11:05:59 INFO SparkEnv: Registering OutputCommitCoordinator
+20/09/16 11:06:00 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+20/09/16 11:06:00 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://sigarg.luxoft.com:4040
+20/09/16 11:06:00 INFO Executor: Starting executor ID driver on host localhost
+20/09/16 11:06:00 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 53349.
+20/09/16 11:06:00 INFO NettyBlockTransferService: Server created on sigarg.luxoft.com:53349
+20/09/16 11:06:00 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+20/09/16 11:06:00 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, sigarg.luxoft.com, 53349, None)
+20/09/16 11:06:00 INFO BlockManagerMasterEndpoint: Registering block manager sigarg.luxoft.com:53349 with 1951.2 MB RAM, BlockManagerId(driver, sigarg.luxoft.com, 53349, None)
+20/09/16 11:06:00 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, sigarg.luxoft.com, 53349, None)
+20/09/16 11:06:00 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, sigarg.luxoft.com, 53349, None)
+20/09/16 11:06:00 WARN SparkContext: Using an existing SparkContext; some configuration may not take effect.
+20/09/16 11:06:01 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('file:/C:/Users/sigarg.LUXOFT/Documents/validation/spark-warehouse').
+20/09/16 11:06:01 INFO SharedState: Warehouse path is 'file:/C:/Users/sigarg.LUXOFT/Documents/validation/spark-warehouse'.
+20/09/16 11:06:02 INFO StateStoreCoordinatorRef: Registered StateStoreCoordinator endpoint
+20/09/16 11:06:02 WARN Column: Constructing trivially true equals predicate, 'class#4 <=> class#4'. Perhaps you need to use aliases.
+20/09/16 11:06:02 WARN Column: Constructing trivially true equals predicate, 'word#5 <=> word#5'. Perhaps you need to use aliases.
+Ignore True case: Filter Not Null Values
+20/09/16 11:06:02 WARN Column: Constructing trivially true equals predicate, 'class#4 <=> class#4'. Perhaps you need to use aliases.
+20/09/16 11:06:02 WARN Column: Constructing trivially true equals predicate, 'word#5 <=> word#5'. Perhaps you need to use aliases.
+Ignore False Null check case: True for null values in list
+20/09/16 11:06:02 WARN Column: Constructing trivially true equals predicate, 'class#4 <=> class#4'. Perhaps you need to use aliases.
+20/09/16 11:06:02 WARN Column: Constructing trivially true equals predicate, 'word#5 <=> word#5'. Perhaps you need to use aliases.
+Ignore False Not Null check case: True for not null values in list
+20/09/16 11:06:02 WARN Column: Constructing trivially true equals predicate, 'class#4 <=> class#4'. Perhaps you need to use aliases.
+20/09/16 11:06:02 WARN Column: Constructing trivially true equals predicate, 'word#5 <=> word#5'. Perhaps you need to use aliases.
+Ignore False Empty check case: True for empty values in list
+20/09/16 11:06:02 WARN Column: Constructing trivially true equals predicate, 'class#4 <=> class#4'. Perhaps you need to use aliases.
+20/09/16 11:06:02 WARN Column: Constructing trivially true equals predicate, 'word#5 <=> word#5'. Perhaps you need to use aliases.
+Ignore True Empty check case: Filter empty values in list
+Bye from this App
+20/09/16 11:06:02 INFO SparkContext: Invoking stop() from shutdown hook
+20/09/16 11:06:02 INFO SparkUI: Stopped Spark web UI at http://sigarg.luxoft.com:4040
+20/09/16 11:06:02 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+20/09/16 11:06:03 INFO MemoryStore: MemoryStore cleared
+20/09/16 11:06:03 INFO BlockManager: BlockManager stopped
+20/09/16 11:06:03 INFO BlockManagerMaster: BlockManagerMaster stopped
+20/09/16 11:06:03 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+20/09/16 11:06:03 INFO SparkContext: Successfully stopped SparkContext
+20/09/16 11:06:03 INFO ShutdownHookManager: Shutdown hook called
+20/09/16 11:06:03 INFO ShutdownHookManager: Deleting directory C:\Users\sigarg.LUXOFT\AppData\Local\Temp\spark-bfb11477-d1b9-49dc-913f-17bdf100fb2d
