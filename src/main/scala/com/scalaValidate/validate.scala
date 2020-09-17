@@ -13,10 +13,12 @@ object validate {
       if (condition == "empty")
       {
         resultantDF = ignoreTrueEmpty(df: DataFrame, newDf: DataFrame)
+        println(s"Ignore True Empty check case: Filter Empty values in column's $ls")
         return resultantDF
       }
       else {
         resultantDF = ignoreTrue(df: DataFrame, newDf: DataFrame)
+        println(s"Ignore True $condition check case: Filter Not Null values in column's $ls")
         return resultantDF
       }
 
@@ -26,16 +28,19 @@ object validate {
         if (condition == "null")
         {
           resultantDF = nullCheck(df: DataFrame, newDf: DataFrame)
+          println(s"Ignore False Null check case: True for Null values in column's $ls")
           return resultantDF
         }
         else if(condition == "notnull")
         {
           resultantDF = notNullCheck(df: DataFrame, newDf: DataFrame)
+          println(s"Ignore False Not Null check case: True for Not Null values in column's $ls")
           return resultantDF
         }
         else if (condition == "empty")
         {
           resultantDF = emptyCheck(df: DataFrame, newDf: DataFrame)
+          println(s"Ignore False Empty check case: True for Empty values in column's $ls")
           return resultantDF
         }
       }
@@ -51,7 +56,6 @@ object validate {
       resDf = resDf.drop(newFrame.col(s"$colName"))
     }
     val finalDf: DataFrame = resDf.dropDuplicates()
-    println("Ignore True case: Filter Not Null Values")
     return finalDf
   }
 
@@ -64,7 +68,6 @@ object validate {
       resDf = resDf.drop(newFrame.col(s"$colName"))
     }
     val finalDf: DataFrame = resDf.dropDuplicates()
-    println("Ignore True Empty check case: Filter empty values in list")
     return finalDf
   }
 
@@ -77,7 +80,6 @@ object validate {
       resDf = resDf.drop(newFrame.col(s"$colName"))
     }
     val finalDf = resDf.dropDuplicates()
-    println("Ignore False Null check case: True for null values in list")
     return finalDf
   }
 
@@ -90,7 +92,6 @@ object validate {
       resDf = resDf.drop(newFrame.col(s"$colName"))
     }
     val finalDf = resDf.dropDuplicates()
-    println("Ignore False Not Null check case: True for not null values in list")
     return finalDf
   }
 
@@ -103,7 +104,6 @@ object validate {
       resDf = resDf.drop(newFrame.col(s"$colName"))
     }
     val finalDf = resDf.dropDuplicates()
-    println("Ignore False Empty check case: True for empty values in list")
     return finalDf
   }
 }

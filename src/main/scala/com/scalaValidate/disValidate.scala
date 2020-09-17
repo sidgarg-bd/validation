@@ -8,17 +8,18 @@ object disValidate {
     var resultantDF: DataFrame = null
     if (ignore == true) {
       resultantDF = ignoreTrue(df: DataFrame)
+      println("Ignore True Distinct check case: Filter Duplicates")
       return resultantDF
     }
     else {
       resultantDF = ignoreFalse(df: DataFrame)
+      println("Ignore False Distinct check case: True for Duplicates")
       return resultantDF
     }
   }
 
   def ignoreTrue(frame: DataFrame): DataFrame = {
     val resDf = frame.dropDuplicates()
-    println("Ignore True case: Filter Duplicates")
     return resDf
   }
 
@@ -30,7 +31,6 @@ object disValidate {
     for(colName <- frame.columns){
       resDf = resDf.drop(frame.col(s"$colName"))
     }
-    println("Ignore False Distinct check case: True for Duplicates")
     return resDf
   }
 }
