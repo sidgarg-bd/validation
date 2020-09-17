@@ -1,119 +1,145 @@
 Hello from App
 Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
-20/09/16 12:52:27 INFO SparkContext: Running Spark version 2.4.6
-20/09/16 12:52:27 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-20/09/16 12:52:27 INFO SparkContext: Submitted application: POC
-20/09/16 12:52:28 INFO SecurityManager: Changing view acls to: SIGarg
-20/09/16 12:52:28 INFO SecurityManager: Changing modify acls to: SIGarg
-20/09/16 12:52:28 INFO SecurityManager: Changing view acls groups to: 
-20/09/16 12:52:28 INFO SecurityManager: Changing modify acls groups to: 
-20/09/16 12:52:28 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(SIGarg); groups with view permissions: Set(); users  with modify permissions: Set(SIGarg); groups with modify permissions: Set()
-20/09/16 12:52:29 INFO Utils: Successfully started service 'sparkDriver' on port 54488.
-20/09/16 12:52:29 INFO SparkEnv: Registering MapOutputTracker
-20/09/16 12:52:29 INFO SparkEnv: Registering BlockManagerMaster
-20/09/16 12:52:29 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
-20/09/16 12:52:29 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
-20/09/16 12:52:29 INFO DiskBlockManager: Created local directory at C:\Users\sigarg.LUXOFT\AppData\Local\Temp\blockmgr-a3d1fd98-fe40-45e5-b849-13f1c68e10cf
-20/09/16 12:52:29 INFO MemoryStore: MemoryStore started with capacity 1951.2 MB
-20/09/16 12:52:29 INFO SparkEnv: Registering OutputCommitCoordinator
-20/09/16 12:52:29 INFO Utils: Successfully started service 'SparkUI' on port 4040.
-20/09/16 12:52:29 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://sigarg.luxoft.com:4040
-20/09/16 12:52:29 INFO Executor: Starting executor ID driver on host localhost
-20/09/16 12:52:29 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 54507.
-20/09/16 12:52:29 INFO NettyBlockTransferService: Server created on sigarg.luxoft.com:54507
-20/09/16 12:52:29 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
-20/09/16 12:52:29 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, sigarg.luxoft.com, 54507, None)
-20/09/16 12:52:29 INFO BlockManagerMasterEndpoint: Registering block manager sigarg.luxoft.com:54507 with 1951.2 MB RAM, BlockManagerId(driver, sigarg.luxoft.com, 54507, None)
-20/09/16 12:52:29 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, sigarg.luxoft.com, 54507, None)
-20/09/16 12:52:29 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, sigarg.luxoft.com, 54507, None)
-20/09/16 12:52:30 WARN SparkContext: Using an existing SparkContext; some configuration may not take effect.
-20/09/16 12:52:30 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('file:/C:/Users/sigarg.LUXOFT/Documents/validation/spark-warehouse').
-20/09/16 12:52:30 INFO SharedState: Warehouse path is 'file:/C:/Users/sigarg.LUXOFT/Documents/validation/spark-warehouse'.
-20/09/16 12:52:30 INFO StateStoreCoordinatorRef: Registered StateStoreCoordinator endpoint
-20/09/16 12:52:30 INFO InMemoryFileIndex: It took 35 ms to list leaf files for 1 paths.
-20/09/16 12:52:30 INFO InMemoryFileIndex: It took 4 ms to list leaf files for 2 paths.
-20/09/16 12:52:33 INFO FileSourceStrategy: Pruning directories with: 
-20/09/16 12:52:33 INFO FileSourceStrategy: Post-Scan Filters: (length(trim(value#0, None)) > 0)
-20/09/16 12:52:33 INFO FileSourceStrategy: Output Data Schema: struct<value: string>
-20/09/16 12:52:33 INFO FileSourceScanExec: Pushed Filters: 
-20/09/16 12:52:33 INFO CodeGenerator: Code generated in 196.097 ms
-20/09/16 12:52:34 INFO CodeGenerator: Code generated in 15.9262 ms
-20/09/16 12:52:34 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 220.8 KB, free 1951.0 MB)
-20/09/16 12:52:34 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 20.6 KB, free 1951.0 MB)
-20/09/16 12:52:34 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on sigarg.luxoft.com:54507 (size: 20.6 KB, free: 1951.2 MB)
-20/09/16 12:52:34 INFO SparkContext: Created broadcast 0 from load at App.scala:52
-20/09/16 12:52:34 INFO FileSourceScanExec: Planning scan with bin packing, max size: 4194356 bytes, open cost is considered as scanning 4194304 bytes.
-20/09/16 12:52:34 INFO SparkContext: Starting job: load at App.scala:52
-20/09/16 12:52:34 INFO DAGScheduler: Got job 0 (load at App.scala:52) with 1 output partitions
-20/09/16 12:52:34 INFO DAGScheduler: Final stage: ResultStage 0 (load at App.scala:52)
-20/09/16 12:52:34 INFO DAGScheduler: Parents of final stage: List()
-20/09/16 12:52:34 INFO DAGScheduler: Missing parents: List()
-20/09/16 12:52:34 INFO DAGScheduler: Submitting ResultStage 0 (MapPartitionsRDD[3] at load at App.scala:52), which has no missing parents
-20/09/16 12:52:34 INFO MemoryStore: Block broadcast_1 stored as values in memory (estimated size 10.3 KB, free 1951.0 MB)
-20/09/16 12:52:34 INFO MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 5.1 KB, free 1950.9 MB)
-20/09/16 12:52:34 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on sigarg.luxoft.com:54507 (size: 5.1 KB, free: 1951.2 MB)
-20/09/16 12:52:34 INFO SparkContext: Created broadcast 1 from broadcast at DAGScheduler.scala:1163
-20/09/16 12:52:34 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 0 (MapPartitionsRDD[3] at load at App.scala:52) (first 15 tasks are for partitions Vector(0))
-20/09/16 12:52:34 INFO TaskSchedulerImpl: Adding task set 0.0 with 1 tasks
-20/09/16 12:52:34 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0, localhost, executor driver, partition 0, PROCESS_LOCAL, 7774 bytes)
-20/09/16 12:52:34 INFO Executor: Running task 0.0 in stage 0.0 (TID 0)
-20/09/16 12:52:34 INFO FileScanRDD: Reading File path: file:///C:/Users/sigarg.LUXOFT/Documents/validation/src/main/resources/test.csv, range: 0-52, partition values: [empty row]
-20/09/16 12:52:34 INFO CodeGenerator: Code generated in 9.202 ms
-20/09/16 12:52:34 INFO Executor: Finished task 0.0 in stage 0.0 (TID 0). 1285 bytes result sent to driver
-20/09/16 12:52:34 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 374 ms on localhost (executor driver) (1/1)
-20/09/16 12:52:34 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool 
-20/09/16 12:52:34 INFO DAGScheduler: ResultStage 0 (load at App.scala:52) finished in 0.478 s
-20/09/16 12:52:34 INFO DAGScheduler: Job 0 finished: load at App.scala:52, took 0.523495 s
-20/09/16 12:52:34 INFO FileSourceStrategy: Pruning directories with: 
-20/09/16 12:52:34 INFO FileSourceStrategy: Post-Scan Filters: 
-20/09/16 12:52:34 INFO FileSourceStrategy: Output Data Schema: struct<value: string>
-20/09/16 12:52:34 INFO FileSourceScanExec: Pushed Filters: 
-20/09/16 12:52:34 INFO CodeGenerator: Code generated in 8.7924 ms
-20/09/16 12:52:34 INFO MemoryStore: Block broadcast_2 stored as values in memory (estimated size 220.8 KB, free 1950.7 MB)
-20/09/16 12:52:34 INFO MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 20.6 KB, free 1950.7 MB)
-20/09/16 12:52:34 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on sigarg.luxoft.com:54507 (size: 20.6 KB, free: 1951.2 MB)
-20/09/16 12:52:34 INFO SparkContext: Created broadcast 2 from load at App.scala:52
-20/09/16 12:52:34 INFO FileSourceScanExec: Planning scan with bin packing, max size: 4194356 bytes, open cost is considered as scanning 4194304 bytes.
-20/09/16 12:52:35 WARN Column: Constructing trivially true equals predicate, 'class#11 <=> class#11'. Perhaps you need to use aliases.
-20/09/16 12:52:35 WARN Column: Constructing trivially true equals predicate, 'word#12 <=> word#12'. Perhaps you need to use aliases.
-Ignore True case: Filter Not Null Values
-20/09/16 12:52:35 WARN Column: Constructing trivially true equals predicate, 'class#11 <=> class#11'. Perhaps you need to use aliases.
-20/09/16 12:52:35 WARN Column: Constructing trivially true equals predicate, 'word#12 <=> word#12'. Perhaps you need to use aliases.
-Ignore False Null check case: True for null values in list
-20/09/16 12:52:35 WARN Column: Constructing trivially true equals predicate, 'class#11 <=> class#11'. Perhaps you need to use aliases.
-20/09/16 12:52:35 WARN Column: Constructing trivially true equals predicate, 'word#12 <=> word#12'. Perhaps you need to use aliases.
-Ignore False Not Null check case: True for not null values in list
-20/09/16 12:52:35 WARN Column: Constructing trivially true equals predicate, 'class#11 <=> class#11'. Perhaps you need to use aliases.
-20/09/16 12:52:35 WARN Column: Constructing trivially true equals predicate, 'word#12 <=> word#12'. Perhaps you need to use aliases.
-Ignore False Empty check case: True for empty values in list
-20/09/16 12:52:35 WARN Column: Constructing trivially true equals predicate, 'class#11 <=> class#11'. Perhaps you need to use aliases.
-20/09/16 12:52:35 WARN Column: Constructing trivially true equals predicate, 'word#12 <=> word#12'. Perhaps you need to use aliases.
-Ignore True Empty check case: Filter empty values in list
-Ignore True Comparison check case: Filter values for ===
-Ignore True Comparison check case: Filter values for >
-Ignore True Comparison check case: Filter values for <
-Ignore True Comparison check case: Filter values for <=
-Ignore True Comparison check case: Filter values for >=
-Ignore False Comparison check case: True for values for ===
-Ignore False Comparison check case: True for values for >
-Ignore False Comparison check case: True for values for <
-Ignore False Comparison check case: True for values for <=
-Ignore False Comparison check case: True for values for >=
-Ignore True case: Filter Values with Length
-Ignore False Length check case: True for correct length values in list
-Ignore True case: Filter Duplicates
-20/09/16 12:52:35 WARN Column: Constructing trivially true equals predicate, 'id#10 <=> id#10'. Perhaps you need to use aliases.
-20/09/16 12:52:35 WARN Column: Constructing trivially true equals predicate, 'class#11 <=> class#11'. Perhaps you need to use aliases.
-20/09/16 12:52:35 WARN Column: Constructing trivially true equals predicate, 'word#12 <=> word#12'. Perhaps you need to use aliases.
+20/09/17 12:24:16 INFO SparkContext: Running Spark version 2.4.6
+20/09/17 12:24:17 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+20/09/17 12:24:17 INFO SparkContext: Submitted application: POC
+20/09/17 12:24:17 INFO SecurityManager: Changing view acls to: SIGarg
+20/09/17 12:24:17 INFO SecurityManager: Changing modify acls to: SIGarg
+20/09/17 12:24:17 INFO SecurityManager: Changing view acls groups to: 
+20/09/17 12:24:17 INFO SecurityManager: Changing modify acls groups to: 
+20/09/17 12:24:17 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(SIGarg); groups with view permissions: Set(); users  with modify permissions: Set(SIGarg); groups with modify permissions: Set()
+20/09/17 12:24:18 INFO Utils: Successfully started service 'sparkDriver' on port 62175.
+20/09/17 12:24:18 INFO SparkEnv: Registering MapOutputTracker
+20/09/17 12:24:18 INFO SparkEnv: Registering BlockManagerMaster
+20/09/17 12:24:18 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+20/09/17 12:24:18 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+20/09/17 12:24:18 INFO DiskBlockManager: Created local directory at C:\Users\sigarg.LUXOFT\AppData\Local\Temp\blockmgr-dbc67a54-e67e-4733-9680-db1200764dd5
+20/09/17 12:24:18 INFO MemoryStore: MemoryStore started with capacity 1951.2 MB
+20/09/17 12:24:18 INFO SparkEnv: Registering OutputCommitCoordinator
+20/09/17 12:24:18 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+20/09/17 12:24:18 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://sigarg.luxoft.com:4040
+20/09/17 12:24:18 INFO Executor: Starting executor ID driver on host localhost
+20/09/17 12:24:18 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 62194.
+20/09/17 12:24:18 INFO NettyBlockTransferService: Server created on sigarg.luxoft.com:62194
+20/09/17 12:24:18 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+20/09/17 12:24:19 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, sigarg.luxoft.com, 62194, None)
+20/09/17 12:24:19 INFO BlockManagerMasterEndpoint: Registering block manager sigarg.luxoft.com:62194 with 1951.2 MB RAM, BlockManagerId(driver, sigarg.luxoft.com, 62194, None)
+20/09/17 12:24:19 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, sigarg.luxoft.com, 62194, None)
+20/09/17 12:24:19 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, sigarg.luxoft.com, 62194, None)
+20/09/17 12:24:19 WARN SparkContext: Using an existing SparkContext; some configuration may not take effect.
+20/09/17 12:24:19 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('file:/C:/Users/sigarg.LUXOFT/Documents/validation/spark-warehouse').
+20/09/17 12:24:19 INFO SharedState: Warehouse path is 'file:/C:/Users/sigarg.LUXOFT/Documents/validation/spark-warehouse'.
+20/09/17 12:24:19 INFO StateStoreCoordinatorRef: Registered StateStoreCoordinator endpoint
+20/09/17 12:24:19 INFO InMemoryFileIndex: It took 36 ms to list leaf files for 1 paths.
+20/09/17 12:24:20 INFO InMemoryFileIndex: It took 4 ms to list leaf files for 2 paths.
+20/09/17 12:24:22 INFO FileSourceStrategy: Pruning directories with: 
+20/09/17 12:24:22 INFO FileSourceStrategy: Post-Scan Filters: (length(trim(value#0, None)) > 0)
+20/09/17 12:24:22 INFO FileSourceStrategy: Output Data Schema: struct<value: string>
+20/09/17 12:24:22 INFO FileSourceScanExec: Pushed Filters: 
+20/09/17 12:24:22 INFO CodeGenerator: Code generated in 231.2538 ms
+20/09/17 12:24:22 INFO CodeGenerator: Code generated in 17.1916 ms
+20/09/17 12:24:22 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 220.9 KB, free 1951.0 MB)
+20/09/17 12:24:22 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 20.6 KB, free 1951.0 MB)
+20/09/17 12:24:22 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on sigarg.luxoft.com:62194 (size: 20.6 KB, free: 1951.2 MB)
+20/09/17 12:24:22 INFO SparkContext: Created broadcast 0 from load at App.scala:53
+20/09/17 12:24:22 INFO FileSourceScanExec: Planning scan with bin packing, max size: 4194356 bytes, open cost is considered as scanning 4194304 bytes.
+20/09/17 12:24:22 INFO SparkContext: Starting job: load at App.scala:53
+20/09/17 12:24:23 INFO DAGScheduler: Got job 0 (load at App.scala:53) with 1 output partitions
+20/09/17 12:24:23 INFO DAGScheduler: Final stage: ResultStage 0 (load at App.scala:53)
+20/09/17 12:24:23 INFO DAGScheduler: Parents of final stage: List()
+20/09/17 12:24:23 INFO DAGScheduler: Missing parents: List()
+20/09/17 12:24:23 INFO DAGScheduler: Submitting ResultStage 0 (MapPartitionsRDD[3] at load at App.scala:53), which has no missing parents
+20/09/17 12:24:23 INFO MemoryStore: Block broadcast_1 stored as values in memory (estimated size 10.3 KB, free 1951.0 MB)
+20/09/17 12:24:23 INFO MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 5.1 KB, free 1950.9 MB)
+20/09/17 12:24:23 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on sigarg.luxoft.com:62194 (size: 5.1 KB, free: 1951.2 MB)
+20/09/17 12:24:23 INFO SparkContext: Created broadcast 1 from broadcast at DAGScheduler.scala:1163
+20/09/17 12:24:23 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 0 (MapPartitionsRDD[3] at load at App.scala:53) (first 15 tasks are for partitions Vector(0))
+20/09/17 12:24:23 INFO TaskSchedulerImpl: Adding task set 0.0 with 1 tasks
+20/09/17 12:24:23 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0, localhost, executor driver, partition 0, PROCESS_LOCAL, 7774 bytes)
+20/09/17 12:24:23 INFO Executor: Running task 0.0 in stage 0.0 (TID 0)
+20/09/17 12:24:23 INFO FileScanRDD: Reading File path: file:///C:/Users/sigarg.LUXOFT/Documents/validation/src/main/resources/test.csv, range: 0-52, partition values: [empty row]
+20/09/17 12:24:23 INFO CodeGenerator: Code generated in 8.6814 ms
+20/09/17 12:24:23 INFO Executor: Finished task 0.0 in stage 0.0 (TID 0). 1285 bytes result sent to driver
+20/09/17 12:24:23 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 367 ms on localhost (executor driver) (1/1)
+20/09/17 12:24:23 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool 
+20/09/17 12:24:23 INFO DAGScheduler: ResultStage 0 (load at App.scala:53) finished in 0.461 s
+20/09/17 12:24:23 INFO DAGScheduler: Job 0 finished: load at App.scala:53, took 0.505135 s
+20/09/17 12:24:23 INFO FileSourceStrategy: Pruning directories with: 
+20/09/17 12:24:23 INFO FileSourceStrategy: Post-Scan Filters: 
+20/09/17 12:24:23 INFO FileSourceStrategy: Output Data Schema: struct<value: string>
+20/09/17 12:24:23 INFO FileSourceScanExec: Pushed Filters: 
+20/09/17 12:24:23 INFO CodeGenerator: Code generated in 7.3292 ms
+20/09/17 12:24:23 INFO MemoryStore: Block broadcast_2 stored as values in memory (estimated size 220.9 KB, free 1950.7 MB)
+20/09/17 12:24:23 INFO MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 20.6 KB, free 1950.7 MB)
+20/09/17 12:24:23 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on sigarg.luxoft.com:62194 (size: 20.6 KB, free: 1951.2 MB)
+20/09/17 12:24:23 INFO SparkContext: Created broadcast 2 from load at App.scala:53
+20/09/17 12:24:23 INFO FileSourceScanExec: Planning scan with bin packing, max size: 4194356 bytes, open cost is considered as scanning 4194304 bytes.
+20/09/17 12:24:23 INFO SparkContext: Starting job: load at App.scala:53
+20/09/17 12:24:23 INFO DAGScheduler: Got job 1 (load at App.scala:53) with 2 output partitions
+20/09/17 12:24:23 INFO DAGScheduler: Final stage: ResultStage 1 (load at App.scala:53)
+20/09/17 12:24:23 INFO DAGScheduler: Parents of final stage: List()
+20/09/17 12:24:23 INFO DAGScheduler: Missing parents: List()
+20/09/17 12:24:23 INFO DAGScheduler: Submitting ResultStage 1 (MapPartitionsRDD[9] at load at App.scala:53), which has no missing parents
+20/09/17 12:24:23 INFO MemoryStore: Block broadcast_3 stored as values in memory (estimated size 15.8 KB, free 1950.7 MB)
+20/09/17 12:24:23 INFO MemoryStore: Block broadcast_3_piece0 stored as bytes in memory (estimated size 8.0 KB, free 1950.7 MB)
+20/09/17 12:24:23 INFO BlockManagerInfo: Added broadcast_3_piece0 in memory on sigarg.luxoft.com:62194 (size: 8.0 KB, free: 1951.1 MB)
+20/09/17 12:24:23 INFO SparkContext: Created broadcast 3 from broadcast at DAGScheduler.scala:1163
+20/09/17 12:24:23 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 1 (MapPartitionsRDD[9] at load at App.scala:53) (first 15 tasks are for partitions Vector(0, 1))
+20/09/17 12:24:23 INFO TaskSchedulerImpl: Adding task set 1.0 with 2 tasks
+20/09/17 12:24:23 INFO TaskSetManager: Starting task 0.0 in stage 1.0 (TID 1, localhost, executor driver, partition 0, PROCESS_LOCAL, 7774 bytes)
+20/09/17 12:24:23 INFO TaskSetManager: Starting task 1.0 in stage 1.0 (TID 2, localhost, executor driver, partition 1, PROCESS_LOCAL, 7774 bytes)
+20/09/17 12:24:23 INFO Executor: Running task 0.0 in stage 1.0 (TID 1)
+20/09/17 12:24:23 INFO Executor: Running task 1.0 in stage 1.0 (TID 2)
+20/09/17 12:24:23 INFO FileScanRDD: Reading File path: file:///C:/Users/sigarg.LUXOFT/Documents/validation/src/main/resources/test.csv, range: 0-52, partition values: [empty row]
+20/09/17 12:24:23 INFO FileScanRDD: Reading File path: file:///C:/Users/sigarg.LUXOFT/Documents/validation/src/main/resources/test.csv, range: 0-52, partition values: [empty row]
+20/09/17 12:24:23 INFO Executor: Finished task 1.0 in stage 1.0 (TID 2). 1496 bytes result sent to driver
+20/09/17 12:24:23 INFO Executor: Finished task 0.0 in stage 1.0 (TID 1). 1496 bytes result sent to driver
+20/09/17 12:24:23 INFO TaskSetManager: Finished task 1.0 in stage 1.0 (TID 2) in 92 ms on localhost (executor driver) (1/2)
+20/09/17 12:24:23 INFO TaskSetManager: Finished task 0.0 in stage 1.0 (TID 1) in 94 ms on localhost (executor driver) (2/2)
+20/09/17 12:24:23 INFO TaskSchedulerImpl: Removed TaskSet 1.0, whose tasks have all completed, from pool 
+20/09/17 12:24:23 INFO DAGScheduler: ResultStage 1 (load at App.scala:53) finished in 0.134 s
+20/09/17 12:24:23 INFO DAGScheduler: Job 1 finished: load at App.scala:53, took 0.138581 s
+20/09/17 12:24:23 WARN Column: Constructing trivially true equals predicate, 'class#11 <=> class#11'. Perhaps you need to use aliases.
+20/09/17 12:24:23 WARN Column: Constructing trivially true equals predicate, 'word#12 <=> word#12'. Perhaps you need to use aliases.
+Ignore True null check case: Filter Not Null values in column's List(class, word)
+20/09/17 12:24:23 WARN Column: Constructing trivially true equals predicate, 'class#11 <=> class#11'. Perhaps you need to use aliases.
+20/09/17 12:24:23 WARN Column: Constructing trivially true equals predicate, 'word#12 <=> word#12'. Perhaps you need to use aliases.
+Ignore False Null check case: True for Null values in column's List(class, word)
+20/09/17 12:24:23 WARN Column: Constructing trivially true equals predicate, 'class#11 <=> class#11'. Perhaps you need to use aliases.
+20/09/17 12:24:23 WARN Column: Constructing trivially true equals predicate, 'word#12 <=> word#12'. Perhaps you need to use aliases.
+Ignore False Not Null check case: True for Not Null values in column's List(class, word)
+20/09/17 12:24:23 WARN Column: Constructing trivially true equals predicate, 'class#11 <=> class#11'. Perhaps you need to use aliases.
+20/09/17 12:24:23 WARN Column: Constructing trivially true equals predicate, 'word#12 <=> word#12'. Perhaps you need to use aliases.
+Ignore False Empty check case: True for Empty values in column's List(class, word)
+20/09/17 12:24:23 WARN Column: Constructing trivially true equals predicate, 'class#11 <=> class#11'. Perhaps you need to use aliases.
+20/09/17 12:24:23 WARN Column: Constructing trivially true equals predicate, 'word#12 <=> word#12'. Perhaps you need to use aliases.
+Ignore True Empty check case: Filter Empty values in column's List(class, word)
+Ignore True Length check case: Filter values having Length 3 values in column word
+Ignore False Length check case: True for Length 3 values in column word
+Ignore True Distinct check case: Filter Duplicates
+20/09/17 12:24:24 WARN Column: Constructing trivially true equals predicate, 'id#10 <=> id#10'. Perhaps you need to use aliases.
+20/09/17 12:24:24 WARN Column: Constructing trivially true equals predicate, 'class#11 <=> class#11'. Perhaps you need to use aliases.
+20/09/17 12:24:24 WARN Column: Constructing trivially true equals predicate, 'word#12 <=> word#12'. Perhaps you need to use aliases.
 Ignore False Distinct check case: True for Duplicates
-Bye from this App
-20/09/16 12:52:35 INFO SparkContext: Invoking stop() from shutdown hook
-20/09/16 12:52:35 INFO SparkUI: Stopped Spark web UI at http://sigarg.luxoft.com:4040
-20/09/16 12:52:35 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
-20/09/16 12:52:35 INFO MemoryStore: MemoryStore cleared
-20/09/16 12:52:35 INFO BlockManager: BlockManager stopped
-20/09/16 12:52:35 INFO BlockManagerMaster: BlockManagerMaster stopped
-20/09/16 12:52:35 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
-20/09/16 12:52:35 INFO SparkContext: Successfully stopped SparkContext
-20/09/16 12:52:35 INFO ShutdownHookManager: Shutdown hook called
-20/09/16 12:52:35 INFO ShutdownHookManager: Deleting directory C:\Users\sigarg.LUXOFT\AppData\Local\Temp\spark-a7a91418-3a23-4c3d-a803-0177efc53648
+Ignore True Comparison check case: Filter values for === 3 in column's List(class, word)
+Ignore True Comparison check case: Filter values for > 3 in column's List(class, word)
+Ignore True Comparison check case: Filter values for < 3 in column's List(class, word)
+Ignore True Comparison check case: Filter values for <= 3 in column's List(class, word)
+Ignore True Comparison check case: Filter values for >= 3 in column's List(class, word)
+Ignore False Comparison check case: True for values for === 3 in column's List(class, word)
+Ignore False Comparison check case: True for values for > 3 in column's List(class, word)
+Ignore False Comparison check case: True for values for < 3 in column's List(class, word)
+Ignore False Comparison check case: True for values for <= 3 in column's List(class, word)
+Ignore False Comparison check case: True for values for >= 3 in column's List(class, word)
+Your condition ==== is Invalid
+Pass valid Condition Out of: >=,<=,<,>,===
+20/09/17 12:24:24 INFO SparkContext: Invoking stop() from shutdown hook
+20/09/17 12:24:24 INFO SparkUI: Stopped Spark web UI at http://sigarg.luxoft.com:4040
+20/09/17 12:24:24 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+20/09/17 12:24:24 INFO MemoryStore: MemoryStore cleared
+20/09/17 12:24:24 INFO BlockManager: BlockManager stopped
+20/09/17 12:24:24 INFO BlockManagerMaster: BlockManagerMaster stopped
+20/09/17 12:24:24 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+20/09/17 12:24:24 INFO SparkContext: Successfully stopped SparkContext
+20/09/17 12:24:24 INFO ShutdownHookManager: Shutdown hook called
+20/09/17 12:24:24 INFO ShutdownHookManager: Deleting directory C:\Users\sigarg.LUXOFT\AppData\Local\Temp\spark-27e590e6-39dd-4d75-b7f7-f3c6e85629da
