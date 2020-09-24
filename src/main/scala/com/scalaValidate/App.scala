@@ -3,6 +3,7 @@ package com.scalaValidate
 import com.scalaValidate.validate.Check
 import com.scalaValidate.compValidate.compCheck
 import com.scalaValidate.disValidate.disCheck
+import com.scalaValidate.joinDbTbl.joinTbl
 import com.scalaValidate.lengthValidate.lengthCheck
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
 import org.apache.spark.{SparkConf, SparkContext}
@@ -75,6 +76,11 @@ object App {
       val df39 = compCheck(someDF, List("class", "word"), "<=", 3, false)
       val df40 = compCheck(someDF, List("class", "word"), ">=", 3, false)
       val df400 = compCheck(someDF, List("class", "word"), "====", 3, true)
+
+      val df51 = joinTbl(spark, List("emp", "empdata", "empsal", "empdept", "dept"),
+        List("empId", "empId", "empId", "deptId"),
+        List("inner", "inner", "inner", "inner"),
+      "src/main/resources/appl.conf")
 
       println("Bye from this App")
     }
