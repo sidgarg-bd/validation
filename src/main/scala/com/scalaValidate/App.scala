@@ -17,8 +17,8 @@ object App {
         .setAppName("POC")
         .setMaster("local[2]")
 
-      val sc = new SparkContext(conf)
-      val spark = SparkSession.builder.config(sc.getConf).getOrCreate()
+      implicit val sc = new SparkContext(conf)
+      implicit val spark = SparkSession.builder.config(sc.getConf).getOrCreate()
 
       val someData = Seq(
         Row("1", "1", "AUS"),
@@ -38,7 +38,7 @@ object App {
       )
 
       val someSchema = List(
-        StructField("id", StringType, true),
+        StructField("empId", StringType, true),
         StructField("class", StringType, true),
         StructField("word", StringType, true)
       )
@@ -77,10 +77,21 @@ object App {
       val df40 = compCheck(someDF, List("class", "word"), ">=", 3, false)
       val df400 = compCheck(someDF, List("class", "word"), "====", 3, true)
 
-      val df51 = joinTbl(spark, List("emp", "empdata", "empsal", "empdept", "dept"),
-        List("empId", "empId", "empId", "deptId"),
-        List("inner", "inner", "inner", "inner"),
-      "src/main/resources/appl.conf")
+      val df51 = joinTbl(someDF,
+        List("mysql", "db2", "mysql", "db2", "mysql"),
+        List("emp", "empdata", "empsal", "empdept", "dept"),
+        List(List("edate","2017-12-01","2020-12-01"),
+          List("empDate","2017-12-01","2020-12-01"),
+          List("salDate","2017-12-01","2020-12-01"),
+          List("deptDate","2017-12-01","2020-12-01"),
+          List("deptDate","2017-12-01","2020-12-01")),
+        List(List("empId"),
+          List("empId", "empName"),
+          List("empId"),
+          List("empId"),
+          List("deptId")),
+        List("inner", "inner", "inner", "inner", "inner"),
+      "src/main/resources/appl.conf").show()
 
       println("Bye from this App")
     }

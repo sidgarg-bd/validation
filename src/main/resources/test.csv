@@ -1,6 +1,6 @@
-id,class,word
-cat,4,3
-bat,3,3
+empId,class,word
+1,4,3
+5,3,3
 2,2,2
 3,5,6
 4,3,3
